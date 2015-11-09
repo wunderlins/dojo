@@ -45,6 +45,7 @@
 		};
 	</script>
 	<!--script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js"></script-->
+	<link rel="stylesheet" href="lib/dojo-release-1.10.4-src/dijit/themes/claro/claro.css" />
 	<script src="lib/dojo-release-1.10.4-src/dojo/dojo.js"></script>
 	
 	<script>
@@ -59,8 +60,8 @@
 
 				// Create a dialog
 				var dialog = new Dialog({
-						title: "Welcome back ", // + config.app.userName,
-						content: "<pre>" + JSON.stringify(config, null, "\t") + "```"
+						title: "Title", // + config.app.userName,
+						content: "<pre>" + JSON.stringify(config, null, "\t")
 				});
 
 				// Draw on the app config to put up a personalized message
