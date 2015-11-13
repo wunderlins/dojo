@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Dojo Form</title>
+
+	<!-- set Dojo configuration, load Dojo -->
+	<script>
+		dojoConfig= {
+			/*
+			has: {
+				"dojo-firebug": true
+			},
+			*/
+			
+			// If true, parses the page with dojo/parser when the DOM and all 
+			// initial dependencies (including those in the dojoConfig.deps array) 
+			// have loaded.
+			parseOnLoad: true,
+			
+			// Defines if Dojo core should be loaded asynchronously. Values can be 
+			// true, false or legacyAsync, which puts the loader permanently in 
+			// legacy cross-domain mode.
+			async: true,
+			
+			// Amount of time to wait before signaling load timeout for a module; 
+			// defaults to 0 (wait forever):
+			waitSeconds: 3,
+			
+			// If true, appends the time as a querystring to each module URL to 
+			// avoid module caching:
+			cacheBust: false,
+			
+			// The base URL prepended to a module identifier when converting it to 
+			// a path or URL.
+			baseUrl: "./lib/dojo-release-1.10.4-src/",
+			
+			// default packages to load
+			packages: [
+				'dojo',
+				'dijit',
+				'dojox'
+			]
+			
+		};
+	</script>
+	<!--script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js"></script-->
+	
+	<link rel="stylesheet" href="lib/dojo-release-1.10.4-src/dijit/themes/tundra/tundra.css" />
+	
+	<script src="lib/dojo-release-1.10.4-src/dojo/dojo.js"></script>
+	
+	<script>
+		require(["dojo/parser", "dijit/registry", "dojo/on", "dijit/form/TextBox", "dojo/domReady!"],
+				    function(parser, registry, on){
+			parser.parse();
+			var box0 = registry.byId("value0Box");
+			var box1 = registry.byId("value1Box");
+			//box1.set("value", box0.get("value") + " modified");
+			//box1.placeHolder = "Some Text"
+			on(box0, "change", function(){
+				box1.set("value", box0.get("value") + " modified");
+			});
+		});
+	</script>
+</head>
+<body class="tundra">
+
+<form>
+	<label for="value0Box">A textbox with a value:</label> <input id="value0Box" data-dojo-type="dijit/form/TextBox" value="Some value" data-dojo-props="intermediateChanges:true"></input>
+	<br>
+	<label for="value1Box">A textbox set with a value from the above textbox:</label> <input id="value1Box" data-dojo-type="dijit/form/TextBox" placeholder="Some Text"></input>
+	<br>
+</form>
+	
+</body>
+</html>
