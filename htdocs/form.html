@@ -39,7 +39,13 @@
 			packages: [
 				'dojo',
 				'dijit',
-				'dojox'
+				'dojox',
+				{
+					// see http://martinpengellyphillips.github.io/dbootstrap/
+					// for examples
+					location: '../dbootstrap',
+					name: 'dbootstrap'
+				}
 			]
 			
 		};
@@ -51,9 +57,58 @@
 	<script src="lib/dojo-release-1.10.4-src/dojo/dojo.js"></script>
 	
 	<script>
-		require(["dojo/parser", "dijit/registry", "dojo/on", "dijit/form/TextBox", "dojo/domReady!"],
-				    function(parser, registry, on){
+		require(['dbootstrap', "dojo/parser", "dijit/registry", "dojo/on",  
+			"dijit/MenuBar",
+			"dijit/PopupMenuBarItem",
+			"dijit/Menu",
+			"dijit/MenuItem",
+			"dijit/DropDownMenu",
+			"dijit/form/TextBox",
+			"dojo/domReady!"],
+			function(dbootstrap, parser, registry, on, MenuBar, PopupMenuBarItem, Menu, MenuItem, DropDownMenu){
+			
 			parser.parse();
+			
+			
+			var pMenuBar = new MenuBar({'class':'primary inverse'});
+			var pSubMenu = new DropDownMenu({});
+			pSubMenu.addChild(new MenuItem({
+				label: "File item #1"
+			}));
+			
+			pSubMenu.addChild(new MenuItem({
+				label: "File item #2"
+			}));
+			
+			pMenuBar.addChild(new PopupMenuBarItem({
+				label: "File",
+				popup: pSubMenu
+			}));
+
+			var pSubMenu2 = new DropDownMenu({});
+			pSubMenu2.addChild(new MenuItem({
+				label: "Cut",
+				iconClass: "dijitEditorIcon dijitEditorIconCut"
+			}));
+			
+			pSubMenu2.addChild(new MenuItem({
+				label: "Copy",
+				iconClass: "dijitEditorIcon dijitEditorIconCopy"
+			}));
+			
+			pSubMenu2.addChild(new MenuItem({
+				label: "Paste",
+				iconClass: "dijitEditorIcon dijitEditorIconPaste"
+			}));
+			
+			pMenuBar.addChild(new PopupMenuBarItem({
+				label: "Edit",
+				popup: pSubMenu2
+			}));
+
+			pMenuBar.placeAt("menubar");
+			pMenuBar.startup();
+			
 			var box0 = registry.byId("value0Box");
 			var box1 = registry.byId("value1Box");
 			//box1.set("value", box0.get("value") + " modified");
@@ -64,7 +119,8 @@
 		});
 	</script>
 </head>
-<body class="tundra">
+<body class="dbootstrap">
+<div id="menubar"></div>
 
 <form>
 	<label for="value0Box">A textbox with a value:</label> <input id="value0Box" data-dojo-type="dijit/form/TextBox" value="Some value" data-dojo-props="intermediateChanges:true"></input>
