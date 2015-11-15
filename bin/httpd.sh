@@ -3,4 +3,4 @@
 cd `dirname $0`/../htdocs
 #pwd
 
-python -m SimpleHTTPServer 8000
+python -m SimpleHTTPServer 8000 
